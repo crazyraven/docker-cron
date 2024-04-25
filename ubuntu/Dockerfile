@@ -13,8 +13,13 @@ RUN chmod 0644 /root/test.sh
 RUN apt-get update
 RUN apt-get -y install cron
 
-# Add the cron job
-RUN crontab -l | { cat; echo "* * * * * bash /root/test.sh"; } | crontab -
+# Add crontab file in the cron directory
+COPY crontab /etc/cron.d/crontab
 
-# Run the command on container startup
-CMD cron
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/crontab
+
+# Apply cron job
+RUN /usr/bin/crontab /etc/cron.d/crontab
+
+CMD ["cron", "-f"]
