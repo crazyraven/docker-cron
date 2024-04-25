@@ -22,4 +22,4 @@ RUN chmod 0644 /etc/cron.d/crontab
 # Apply cron job
 RUN /usr/bin/crontab /etc/cron.d/crontab
 
-CMD ["cron", "-f"]
+CMD cron && tail -f /dev/null
