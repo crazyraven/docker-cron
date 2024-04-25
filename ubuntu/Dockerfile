@@ -2,11 +2,8 @@ FROM ubuntu:18.04
 
 MAINTAINER Anton Lebedev <mailbox@lebster.me>
 
-RUN set -x \
-&& { \
-echo '#!/bin/bash'; \
-echo 'echo "test" >> /tmp/test'; \
-} > /root/test.sh \
+# Add crontab file in the cron directory
+COPY test.sh /root/test.sh
 
 
 # Give execution rights on the cron scripts
